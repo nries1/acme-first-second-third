@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .content {
+                display: flex;
+                flex-wrap: wrap;
+                /* justify-content: space-around; */
+            }
+            .slot-container {
+                border: 1px solid;
+                display: flex;
+                flex-direction: column;
+                height: 300px;
+                min-width: 200px;
+                flex-grow: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Acme First Second Third</h1>
+        <div id="app" class='content'>
+            <slot-container v-for="slot in slots" v-bind:number="slot" v-bind:users="users"></slot-container>
+            <!-- <div class='slot-container'>
+                <div data-users='first-users'>down</div>
+                <div data-users='first-users'>up</div>
+                <div id='first' class='user-container'></div>
+            </div>
+            <div class='slot-container'>
+                <div data-users='second-users'>down</div>
+                <div data-users='second-users'>up</div>
+                <div id='second' class='user-container'></div>
+            </div>
+            <div class='slot-container'>
+                <div data-users='third-users'>down</div>
+                <div data-users='third-users'>up</div>
+                <div id='third' class='user-container'></div>
+            </div> -->
+         </div>
+         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            Vue.component('slot-container', {
+                template: `<div class='slot-container'>
+                                <div data-users='first-users'>down</div>
+                                <div data-users='first-users'>up</div>
+                                <div v-bind:id="number" class='user-container'>
+                                    <div v-for="user in users"></div>
+                                </div>
+                            </div>`,
+                props: ['number', 'users']
+            });
+
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hi there!',
+                    users: [
+                        {id: 1, name: 'moe', slot: 'first', selected: false},
+                        {id: 2, name: 'larry', slot: 'second', selected: false},
+                        {id: 3, name: 'curly', slot: 'third', selected: false},
+                        {id: 4, name: 'lucy', slot: 'third', selected: false}
+                    ],
+                    slots: ['first', 'second', 'third']
+                }
+            }); 
+        </script>
+    </body>
+</html>
