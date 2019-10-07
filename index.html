@@ -44,7 +44,7 @@
                                 <div data-users='first-users'>down</div>
                                 <div data-users='first-users'>up</div>
                                 <div v-bind:id="number" class='user-container'>
-                                    <div v-for="user in users"></div>
+                                    <div v-for="user in users">{{user.name}}</div>
                                 </div>
                             </div>`,
                 props: ['number', 'users']
